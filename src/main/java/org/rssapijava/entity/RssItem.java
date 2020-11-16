@@ -1,29 +1,27 @@
 package org.rssapijava.entity;
 
-import org.rssapijava.type.RssSource;
-
 import java.sql.Timestamp;
 
 public class RssItem extends BaseEntity {
-    private RssSource source;
+    private Integer sourceId;
     private String title;
     private String link;
     private Timestamp date;
 
-    public RssItem(Integer id, RssSource source, String title, String link, Timestamp date) {
+    public RssItem(Integer id, Integer sourceId, String title, String link, Timestamp date) {
         super(id);
-        this.source = source;
+        this.sourceId = sourceId;
         this.title = title;
         this.link = link;
         this.date = date;
     }
 
-    public RssSource getSource() {
-        return source;
+    public Integer getSourceId() {
+        return sourceId;
     }
 
-    public void setSource(RssSource source) {
-        this.source = source;
+    public void setSourceId(Integer sourceId) {
+        this.sourceId = sourceId;
     }
 
     public String getTitle() {
@@ -42,9 +40,7 @@ public class RssItem extends BaseEntity {
         this.link = link;
     }
 
-    public Timestamp getDate() {
-        return date;
-    }
+    public Timestamp getDate() { return date; }
 
     public void setDate(Timestamp date) {
         this.date = date;

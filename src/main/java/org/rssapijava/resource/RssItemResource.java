@@ -1,33 +1,45 @@
 package org.rssapijava.resource;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.rssapijava.entity.RssItem;
-import org.rssapijava.type.RssSource;
+import org.rssapijava.entity.RssSource;
 
 import java.sql.Timestamp;
 
 public class RssItemResource extends BaseResource {
     private Integer id;
-    private Integer source;
+    private Integer sourceId;
     private String title;
     private String link;
     private Timestamp date;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private RssSourceResource source;
 
     public RssItemResource() {}
 
     public RssItemResource(RssItem rssItem) {
         this.id = rssItem.getId();
-        this.source = rssItem.getSource().getNumVal();
+        this.sourceId = rssItem.getSourceId();
         this.title = rssItem.getTitle();
         this.link = rssItem.getLink();
         this.date = rssItem.getDate();
     }
 
-    public Integer getSource() {
-        return source;
+    public Integer getId() {
+        return id;
     }
 
-    public void setSource(Integer source) {
-        this.source = source;
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getSourceId() {
+        return sourceId;
+    }
+
+    public void setSourceId(Integer sourceId) {
+        this.sourceId = sourceId;
     }
 
     public String getTitle() {
@@ -54,18 +66,14 @@ public class RssItemResource extends BaseResource {
         this.date = date;
     }
 
-    public Integer getId() {
-        return id;
-    }
+    public RssSourceResource getSource() { return this.source; }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    public void setSource(RssSourceResource source) { this.source = source; }
 
     public RssItem toEntity() {
         return new RssItem(
                 this.id,
-                RssSource.fromInt(this.source),
+                this.sourceId,
                 this.title,
                 this.link,
                 this.date
